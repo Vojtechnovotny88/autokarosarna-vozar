@@ -863,7 +863,15 @@
            ======================================== */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: none !important;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background: var(--color-black);
+                width: 100%;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
             }
 
             .mobile-menu-btn {
@@ -872,7 +880,7 @@
 
             .hero {
                 min-height: auto;
-                padding: 8rem 0;
+                padding: 10rem 0;
             }
 
             .hero-buttons {
@@ -894,7 +902,7 @@
             }
 
             .emergency-phone {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .footer-content {

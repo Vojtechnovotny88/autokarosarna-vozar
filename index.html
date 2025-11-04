@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autokarosárna Vozár s.r.o. | Karosárna, Lakovna, Servis | Petřvald u Karviné</title>
+    <meta name="description" content="Komplexní autoservis v Petřvaldě u Karviné. Karosářské opravy, lakování, řešení pojistných událostí. ☎ +420 604 814 683">
+    <meta name="keywords" content="autokarosárna, autolakovna, autoservis, Petřvald, Karviná, pojistné události">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Autokarosárna Vozár s.r.o.">
+    <meta property="og:description" content="Komplexní péče o vaše vozidlo - karosárna, lakovna, servis">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           ZÁKLADNÍ STYLY A PROMĚNNÉ
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Barvy */
+            --color-black: #000000;
+            --color-dark-gray: #1a1a1a;
+            --color-medium-gray: #2d2d2d;
+            --color-light-gray: #3d3d3d;
+            --color-orange: #ff6600;
+            --color-orange-dark: #cc5200;
+            --color-orange-light: #ff8533;
+            --color-white: #ffffff;
+            --color-text-gray: #b0b0b0;
+            
+            /* Typografie */
+            --font-main: 'Montserrat', sans-serif;
+            
+            /* Rozestupy */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           TYPOGRAFIE
+           ======================================== */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--color-text-gray);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* ========================================
+           KOMPONENTY
+           ======================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .section {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--color-orange);
+            position: relative;
+            padding-bottom: var(--spacing-md);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-orange), transparent);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--color-text-gray);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        /* Tlačítka */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--color-orange);
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-white);
+            color: var(--color-white);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-white);
+            color: var(--color-black);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* ========================================
+           NAVIGACE
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 102, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-nav {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-nav img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-orange);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--color-orange);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .nav-cta:hover {
+            background: var(--color-orange-dark);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ========================================
+           HERO SEKCE
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-color: var(--color-black);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(0, 0, 0, 0.85) 0%, 
+                rgba(26, 26, 26, 0.75) 50%, 
+                rgba(255, 102, 0, 0.15) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .hero-logo {
+            max-width: 500px;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--color-text-gray);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 300;
+        }
+
+        .hero-services {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--color-orange);
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: 2px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-lg);
+        }
+
+        /* ========================================
+           O FIRMĚ SEKCE
+           ======================================== */
+        .about {
+            background: var(--color-dark-gray);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: var(--spacing-lg);
+        }
+
+        .about-text h3 {
+            color: var(--color-orange);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-text p {
+            margin-bottom: var(--spacing-md);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--color-medium-gray);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-title {
+            color: var(--color-orange);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .feature-text {
+            color: var(--color-text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* ========================================
+           SEKCE SLUŽEB
+           ======================================== */
+        .services {
+            background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: var(--spacing-lg);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-card {
+            background: var(--color-medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-orange);
+            box-shadow: 0 20px 40px rgba(255, 102, 0, 0.2);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-title {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+
+        .service-description {
+            color: var(--color-text-gray);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           HAVÁRIE SEKCE
+           ======================================== */
+        .accident {
+            background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
+            position: relative;
+        }
+
+        .accident-banner {
+            background: var(--color-medium-gray);
+            padding: 3rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border: 2px solid var(--color-orange);
+        }
+
+        .accident-banner h3 {
+            color: var(--color-orange);
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .accident-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: var(--spacing-lg);
+        }
+
+        .accident-section h3 {
+            color: var(--color-orange);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .accident-steps {
+            list-style: none;
+        }
+
+        .accident-steps li {
+            padding: 1rem 0;
+            padding-left: 3rem;
+            position: relative;
+            color: var(--color-text-gray);
+            border-left: 2px solid var(--color-light-gray);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .accident-steps li::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--color-orange);
+            border-radius: 50%;
+        }
+
+        .accident-steps li:last-child {
+            border-left: 2px solid transparent;
+        }
+
+        .services-list {
+            list-style: none;
+        }
+
+        .services-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--color-text-gray);
+        }
+
+        .services-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-orange);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .emergency-cta {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding: 3rem;
+            background: var(--color-medium-gray);
+            border-radius: 10px;
+        }
+
+        .emergency-label {
+            font-size: 1.5rem;
+            color: var(--color-orange);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .emergency-phone {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .emergency-phone:hover {
+            color: var(--color-orange);
+        }
+
+        /* ========================================
+           GALERIE
+           ======================================== */
+        .gallery {
+            background: var(--color-dark-gray);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: var(--spacing-lg);
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            color: var(--color-white);
+            font-weight: 600;
+        }
+
+        /* ========================================
+           KONTAKT
+           ======================================== */
+        .contact {
+            background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: var(--spacing-lg);
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--color-medium-gray);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+        }
+
+        .contact-title {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+
+        .contact-info {
+            color: var(--color-text-gray);
+        }
+
+        .contact-info a {
+            color: var(--color-orange);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .contact-info a:hover {
+            color: var(--color-white);
+        }
+
+        .phone-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-white) !important;
+            background: var(--color-orange);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .phone-number:hover {
+            background: var(--color-orange-dark);
+            transform: scale(1.05);
+            color: var(--color-white) !important;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: var(--spacing-md);
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-light-gray);
+            border-radius: 50px;
+            color: var(--color-white) !important;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .social-link:hover {
+            background: var(--color-orange);
+            transform: translateY(-3px);
+            color: var(--color-white) !important;
+        }
+
+        .address-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .address-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-orange);
+            border-radius: 50px;
+            color: var(--color-white) !important;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .address-link:hover {
+            background: var(--color-orange-dark);
+            transform: translateY(-3px);
+            color: var(--color-white) !important;
+        }
+
+        .map-container {
+            margin-top: var(--spacing-lg);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 450px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: var(--color-black);
+            padding: var(--spacing-lg) 0 var(--spacing-md);
+            border-top: 1px solid var(--color-light-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-section h4 {
+            color: var(--color-orange);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-text {
+            color: var(--color-text-gray);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-links a {
+            color: var(--color-text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--color-light-gray);
+            color: var(--color-text-gray);
+            font-size: 0.875rem;
+        }
+
+        /* ========================================
+           RESPONSIVNÍ DESIGN
+           ======================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: var(--spacing-xl) 0;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .about-content,
+            .accident-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .emergency-phone {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========================================
+           ANIMACE
+           ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .img-placeholder {
+            background: linear-gradient(90deg, var(--color-medium-gray) 0%, var(--color-light-gray) 50%, var(--color-medium-gray) 100%);
+            background-size: 200% 100%;
+            animation: loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         NAVIGACE
+         ======================================== -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="logo-nav">
+                <img src="images/logo-vozar.png" alt="Autokarosárna Vozár s.r.o." onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display: none; color: var(--color-orange); font-weight: 700; font-size: 1.2rem;">VOZÁR</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#havarie">Havárie</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+                <li><a href="tel:+420604814683" class="nav-cta">Zavolat</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- ========================================
+         HERO SEKCE
+         ======================================== -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="images/hero-background.webp" alt="Autokarosárna Vozár dílna" onerror="this.style.display='none';">
+        </div>
+        
+        <div class="hero-overlay"></div>
+
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="hero-logo">
+                    <img src="images/logo-vozar.png" alt="Autokarosárna Vozár s.r.o." onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none; text-align: center;">
+                        <h1 style="color: var(--color-orange); font-size: 3.5rem; margin-bottom: 0;">VOZÁR</h1>
+                        <p style="color: var(--color-white); font-size: 1.5rem; letter-spacing: 0.3rem;">AUTOKAROSÁRNA s.r.o.</p>
+                    </div>
+                </div>
+                
+                <p class="hero-tagline">Komplexní péče o vaše vozidlo</p>
+                <p class="hero-services">KAROSÁRNA • LAKOVNA • SERVIS</p>
+                
+                <div class="hero-buttons">
+                    <a href="tel:+420604814683" class="btn">Zavolat nyní</a>
+                    <a href="#sluzby" class="btn btn-outline">Naše služby</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         O FIRMĚ
+         ======================================== -->
+    <section id="o-nas" class="section about">
+        <div class="container">
+            <h2 class="section-title">O naší firmě</h2>
+            <p class="section-subtitle">
+                Jsme profesionální autokarosárna a autolakovna s dlouholetými zkušenostmi v oboru
+            </p>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Autokarosárna Vozár s.r.o.</h3>
+                    <p>
+                        Specializujeme se na kompletní péči o vaše vozidlo. Naše firma nabízí široké spektrum 
+                        služeb od karosářských oprav, přes lakování, až po běžný autoservis. 
+                        Disponujeme moderní lakovou kabinou a špičkovým vybavením.
+                    </p>
+                    <p>
+                        Díky dlouholetým zkušenostem v oboru dokážeme vyřešit i ty nejsložitější případy 
+                        poškození vozidel. Spolupracujeme s předními pojišťovnami a zajistíme vám kompletní 
+                        servis při řešení pojistných událostí.
+                    </p>
+                    <p>
+                        Naším cílem je vrátit vašemu vozidlu původní stav a zajistit vaši spokojenost 
+                        s kvalitou provedené práce.
+                    </p>
+                </div>
+
+                <div class="about-image">
+                    <img src="images/team-workshop.jpg" alt="Tým Autokarosárny Vozár" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                </div>
+            </div>
+
+            <div class="about-features">
+                <div class="feature-item">
+                    <div class="feature-title">Zkušenosti</div>
+                    <div class="feature-text">Dlouholeté zkušenosti v oboru</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-title">Moderní vybavení</div>
+                    <div class="feature-text">Špičková technologie a laková kabina</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-title">Pojišťovny</div>
+                    <div class="feature-text">Spolupráce s předními pojišťovnami</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SLUŽBY
+         ======================================== -->
+    <section id="sluzby" class="section services">
+        <div class="container">
+            <h2 class="section-title">Naše služby</h2>
+            <p class="section-subtitle">
+                Poskytujeme komplexní služby pro péči o vaše vozidlo
+            </p>
+
+            <div class="services-grid">
+                <!-- Služba 1: Karosářské opravy -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/service-1.jpg" alt="Karosářské opravy" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Karosářské opravy</h3>
+                        <p class="service-description">
+                            Komplexní opravy poškozené karoserie, rámové opravy, klempířské práce. 
+                            Vrátíme vašemu vozu původní tvar a funkčnost.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Služba 2: Lakování vozidel -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/service-2.jpg" alt="Lakování vozidel" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Lakování vozidel</h3>
+                        <p class="service-description">
+                            Profesionální lakování v moderní lakové kabině. Kompletní lakování vozidla 
+                            nebo dílčí opravy s perfektním barevným odstínem.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Služba 3: Autoservis -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/service-3.jpg" alt="Autoservis" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Autoservis</h3>
+                        <p class="service-description">
+                            Základní mechanické opravy vozidel, servisní údržba, diagnostika. 
+                            Komplexní péče o technický stav vašeho vozu.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Služba 4: Plnění klimatizací -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/service-4.jpg" alt="Plnění klimatizací" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Plnění klimatizací</h3>
+                        <p class="service-description">
+                            Servis klimatizačních systémů, plnění chladiva, čištění klimatizace. 
+                            Zajistíme komfort ve vašem voze.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Služba 5: Výměna oleje v automatech -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/service-5.jpg" alt="Výměna oleje v automatech" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Výměna oleje v automatech</h3>
+                        <p class="service-description">
+                            Specializovaná údržba automatických převodovek, výměna oleje včetně filtrů. 
+                            Prodloužíme životnost vaší převodovky.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Služba 6: Řešení škodních událostí -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/service-6.jpg" alt="Řešení škodních událostí" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Řešení škodních událostí</h3>
+                        <p class="service-description">
+                            Komplexní zajištění oprav po nehodách, komunikace s pojišťovnou, 
+                            odtah vozidla, náhradní vůz. Vše pod jednou střechou.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HAVÁRIE & POJISTNÉ UDÁLOSTI
+         ======================================== -->
+    <section id="havarie" class="section accident">
+        <div class="container">
+            <div class="accident-banner">
+                <h3>NABOURALI VÁS? ZŮSTAŇTE V KLIDU.</h3>
+                <p style="font-size: 1.25rem; color: var(--color-white); margin-top: 1rem;">
+                    My se o vše postaráme.
+                </p>
+            </div>
+
+            <div class="accident-content">
+                <div class="accident-section">
+                    <h3>Postup při nehodě:</h3>
+                    <ul class="accident-steps">
+                        <li>Zajistěte bezpečí – zapněte výstražná světla, oblečte si bezpečnostní vestu.</li>
+                        <li>V případě zranění okamžitě volejte 112.</li>
+                        <li>Zdokumentujte nehodu – vyfoťte poškození, pozice vozidel.</li>
+                        <li>Zavolejte nám – my zařídíme vše ostatní.</li>
+                    </ul>
+                </div>
+
+                <div class="accident-section">
+                    <h3>Co pro vás zařídíme:</h3>
+                    <ul class="services-list">
+                        <li>Odtah vozidla z místa nehody</li>
+                        <li>Zapůjčení náhradního automobilu</li>
+                        <li>Kompletní komunikaci s pojišťovnou</li>
+                        <li>Opravu vašeho vozu v našem servisu</li>
+                        <li>Pomoc s vyplněním záznamů o nehodě</li>
+                        <li>Zajištění všech potřebných dokumentů</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="emergency-cta">
+                <p class="emergency-label">NONSTOP LINKA PRO HAVÁRIE:</p>
+                <a href="tel:+420604814683" class="emergency-phone">+420 604 814 683</a>
+                <p style="color: var(--color-text-gray); margin-top: 1rem;">
+                    K dispozici 24 hodin denně, 7 dní v týdnu
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         GALERIE PRACÍ
+         ======================================== -->
+    <section id="galerie" class="section gallery">
+        <div class="container">
+            <h2 class="section-title">Galerie našich prací</h2>
+            <p class="section-subtitle">
+                Podívejte se na ukázky našich realizací
+            </p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery-1.jpg" alt="Ukázka práce 1" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Karosářská oprava</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery-2.jpg" alt="Ukázka práce 2" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Lakování vozu</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery-3.jpg" alt="Ukázka práce 3" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Před opravou</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery-4.jpg" alt="Ukázka práce 4" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Po opravě</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery-5.jpg" alt="Ukázka práce 5" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Detail lakování</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/gallery-6.jpg" alt="Ukázka práce 6" class="img-placeholder" onerror="this.classList.add('img-placeholder');">
+                    <div class="gallery-overlay">
+                        <p class="gallery-caption">Rámová oprava</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         KONTAKT
+         ======================================== -->
+    <section id="kontakt" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Kontaktujte nás</h2>
+            <p class="section-subtitle">
+                Jsme tu pro vás
+            </p>
+
+            <div class="contact-grid">
+                <!-- Telefon -->
+                <div class="contact-card">
+                    <h3 class="contact-title">Telefon</h3>
+                    <div class="contact-info">
+                        <a href="tel:+420604814683" class="phone-number">+420 604 814 683</a>
+                        <p>Nonstop linka pro havárie</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">
+                            Po–Pá: 7:00–17:00<br>
+                            So–Ne: na zavolání
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Adresa -->
+                <div class="contact-card">
+                    <h3 class="contact-title">Adresa</h3>
+                    <div class="contact-info">
+                        <p style="font-weight: 600; color: var(--color-white); margin-bottom: 0.5rem;">
+                            Autokarosárna Vozár s.r.o.
+                        </p>
+                        <p>
+                            Závodní<br>
+                            Petřvald u Karviné<br>
+                            Moravskoslezský kraj<br>
+                            Česká republika
+                        </p>
+                        <div class="address-links">
+                            <a href="https://maps.google.com/?q=Autokarosárna+Vozár+s.r.o.,+Závodní,+Petřvald+u+Karviné" target="_blank" class="address-link">
+                                Google Mapy
+                            </a>
+                            <a href="https://mapy.cz/zakladni?q=Autokarosárna+Vozár+s.r.o.,+Závodní,+Petřvald+u+Karviné" target="_blank" class="address-link">
+                                Seznam Mapy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sociální sítě -->
+                <div class="contact-card">
+                    <h3 class="contact-title">Sledujte nás</h3>
+                    <div class="contact-info">
+                        <p style="margin-bottom: 1rem;">Jsme aktivní na sociálních sítích</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/autokarosarnavozar" target="_blank" rel="noopener noreferrer" class="social-link">
+                                Facebook
+                            </a>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/autokarosarna_vozar" target="_blank" rel="noopener noreferrer" class="social-link">
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Maps -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2574.109974761779!2d18.3807784!3d49.8215982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713fd00337f2df3%3A0x21a9046ba1e7b166!2sAutokaros%C3%A1rna%20Voz%C3%A1r%20s.r.o.!5e0!3m2!1scs!2scz!4v1762274353339!5m2!1scs!2scz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Logo a informace -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo-vozar.png" alt="Autokarosárna Vozár s.r.o." onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display: none; color: var(--color-orange); font-weight: 700; font-size: 1.5rem;">VOZÁR</div>
+                    </div>
+                    <p class="footer-text">
+                        Profesionální autokarosárna a autolakovna v Petřvaldě u Karviné. 
+                        Komplexní péče o vaše vozidlo.
+                    </p>
+                </div>
+
+                <!-- Rychlé odkazy -->
+                <div class="footer-section">
+                    <h4>Rychlé odkazy</h4>
+                    <ul class="footer-links">
+                        <li><a href="#o-nas">O nás</a></li>
+                        <li><a href="#sluzby">Naše služby</a></li>
+                        <li><a href="#havarie">Řešení havárií</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Služby -->
+                <div class="footer-section">
+                    <h4>Služby</h4>
+                    <ul class="footer-links">
+                        <li><a href="#sluzby">Karosářské opravy</a></li>
+                        <li><a href="#sluzby">Lakování vozidel</a></li>
+                        <li><a href="#sluzby">Autoservis</a></li>
+                        <li><a href="#sluzby">Plnění klimatizací</a></li>
+                        <li><a href="#sluzby">Výměna oleje v automatech</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kontakt -->
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p class="footer-text">
+                        <strong>Telefon:</strong><br>
+                        <a href="tel:+420604814683" style="color: var(--color-orange);">+420 604 814 683</a>
+                    </p>
+                    <p class="footer-text">
+                        <strong>Adresa:</strong><br>
+                        Závodní, Petřvald u Karviné<br>
+                        Moravskoslezský kraj
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Autokarosárna Vozár s.r.o. Všechna práva vyhrazena.</p>
+                <p style="margin-top: 0.5rem;">
+                    Profesionální autokarosárna, lakovna a servis v Petřvaldě u Karviné
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        // Změna pozadí navigace při scrollování
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Plynulé scrollování
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animace při scrollování
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Sledování elementů pro animaci
+        document.querySelectorAll('.service-card, .contact-card, .feature-item, .gallery-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
+</body>
+</html>

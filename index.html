@@ -626,7 +626,8 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background: var(--color-black);
             transition: transform 0.3s ease;
         }
 
@@ -709,17 +710,18 @@
             font-size: 1.75rem;
             font-weight: 700;
             color: var(--color-white) !important;
-            background: var(--color-orange);
+            background: var(--color-light-gray);
             padding: 1rem 2rem;
             border-radius: 50px;
             display: inline-block;
             margin: 1rem 0;
             transition: all 0.3s ease;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         .phone-number:hover {
-            background: var(--color-orange-dark);
+            background: var(--color-orange);
             transform: scale(1.05);
             color: var(--color-white) !important;
         }
@@ -972,14 +974,6 @@
 
         <div class="container">
             <div class="hero-content fade-in">
-                <div class="hero-logo">
-                    <img src="images/logo-vozar.png" alt="Autokarosárna Vozár s.r.o." onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div style="display: none; text-align: center;">
-                        <h1 style="color: var(--color-orange); font-size: 3.5rem; margin-bottom: 0;">VOZÁR</h1>
-                        <p style="color: var(--color-white); font-size: 1.5rem; letter-spacing: 0.3rem;">AUTOKAROSÁRNA s.r.o.</p>
-                    </div>
-                </div>
-                
                 <p class="hero-tagline">Komplexní péče o vaše vozidlo</p>
                 <p class="hero-services">KAROSÁRNA • LAKOVNA • SERVIS</p>
                 
@@ -1258,7 +1252,7 @@
                 <!-- Telefon -->
                 <div class="contact-card">
                     <h3 class="contact-title">Telefon</h3>
-                    <div class="social-links">
+                    <div class="contact-info">
                         <a href="tel:+420604814683" class="phone-number">+420 604 814 683</a>
                         <p>Nonstop linka pro havárie</p>
                         <p style="margin-top: 1rem; font-size: 0.9rem;">
@@ -1281,7 +1275,7 @@
                             Moravskoslezský kraj<br>
                             Česká republika
                         </p>
-                        <div class="social-links">
+                        <div class="address-links">
                             <a href="https://maps.google.com/?q=Autokarosárna+Vozár+s.r.o.,+Závodní,+Petřvald+u+Karviné" target="_blank" class="address-link">
                                 Google Mapy
                             </a>
